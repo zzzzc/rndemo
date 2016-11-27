@@ -11,7 +11,27 @@
 
 <a id="2"></a>
 ##2. 在现有APP中加入RN
-1. 安装[cocoapods](http://www.jianshu.com/p/b64b4fd08d3c)(ios模块管理工具)
+###安装ios依赖
+1.安装 Command Line Tools for Xcode: `$ xcode-select`;
+
+2.安装 [cocoapods] (http://www.jianshu.com/p/b64b4fd08d3c): `$ gem update --system` , `$ gem install cocoapods`;
+
+3.在ios项目里引入react依赖，在ios/Podfile里加入如下代码
+
+```
+pod 'React', :path => '../node_modules/react-native', :subspecs => [
+  'Core',
+  'RCTText',
+  'RCTNetwork',
+  'RCTWebSocket', # needed for debugging
+  # Add any other subspecs you want to use in your project
+]
+```
+
+4.`$pod install`安装React-Native;
+
+###见证奇迹的时刻
+
 
 
 
