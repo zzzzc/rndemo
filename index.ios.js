@@ -12,12 +12,13 @@ import {
   View
 } from 'react-native';
 
-export default class rndemo extends Component {
+export default class RNRootView extends Component {
   render() {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+         props:{JSON.stringify(this.props)}
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('rndemo', () => rndemo);
+AppRegistry.registerComponent('RNRootView', () => RNRootView);
