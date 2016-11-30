@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build": "react-native bundle --entry-file index.ios.js --bundle-output ./IWHouseIOS/bundle/index.ios.jsbundle --platform ios --assets-dest ./IWHouseIOS/bundle --dev false",
     "test": "jest"
   },
   "dependencies": {

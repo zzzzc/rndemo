@@ -9,46 +9,75 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
+  TouchableOpacity,
+  NativeModules
 } from 'react-native';
 
-export default class RNRootView extends Component {
-  render() {
-    console.log(this.props)
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-         props:{JSON.stringify(this.props)}
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import NewHouse from './js/views/newHouse/';
+import NewHouseDetail from './js/views/newHouseDetail/';
+
+let IWReactNativeBridges = NativeModules.IWReactNativeBridges;
+
+let backHomeView = function () {
+  // 参数与OC定义的方法所接受参数对应
+  IWReactNativeBridges.BackHomeView({}, (data)=>{
+    console.log(data);// 'success'
+  });
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
+
+let NavigationBarRouteMapper = {
+  LeftButton(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity onPress={()=>index > 0 ? navigator.pop() : backHomeView()}>
+        <Text>返回</Text>
+      </TouchableOpacity>
+    );
+  },
+  RightButton (route, navigator, index, navState) {
+    return null;
+  },
+  Title (route, navigator, index, navState){
+    return <Text>{route.title}</Text>
+  }
+};
+
+export default class RNRootView extends Component {
+  _renderScene(state,navigator){
+    switch (state.state){
+      case 'NewHouse':
+        return <NewHouse {...{state,navigator}}/>;
+      case 'NewHouseDetail':
+        return <NewHouseDetail {...{state,navigator}}/>
+      default:
+        return <View/>;
+    }
+  }
+  render() {
+    let {props:{route}} = this;
+    return(
+      <View style={styles.container}>
+        <Navigator 
+          initialRoute={route} 
+          renderScene={this._renderScene}
+          navigationBar={
+            <Navigator.NavigationBar
+              routeMapper={NavigationBarRouteMapper}
+            />
+          }
+        />
+      </View>
+    );
+  }
+}
 
 AppRegistry.registerComponent('RNRootView', () => RNRootView);
