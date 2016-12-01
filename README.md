@@ -1,23 +1,26 @@
 # React-native On IOS
 
-##目录
+## 目录
 1. [开发环境及项目结构](#install)2. [在APP中嵌入RN页面](#route)
-3. [在RN中调用OC接口](#interface)4. [开发和调试](#dev)5. [打包发布](#build)
+3. [在RN中调用APP接口](#interface)4. [开发调试](#dev)5. [编译打包](#build)
 
 <a id="install"></a>
-##开发环境及项目结构
-###项目依赖：1. Node2. Watchman （监听文件变化）3. react-native-cli （rn命令行工具）4. X-code
+## 开发环境及项目结构
+### 项目依赖：1. nodejs;
+2. x-code;3. watchman: `$ brew install watchman`;4. react-native-cli: `$ npm i react-native-cli -g`;
 
-> Ref:[https://facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)###项目结构:
+
+> Ref:[https://facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)### 项目结构:
 
 ```
 .
 ├── IWHouseIOS		//爱屋ios客户端，ignored
 ├── README.md
 ├── __tests__
-├── android			
+├── android	
 ├── index.android.js
 ├── index.ios.js    //ios 入口文件
+├── ios             //ios demo App
 ├── js
 │   ├── components  //组件
 │   ├── styles      //通用样式
@@ -27,8 +30,8 @@
 ```
 
 <a id="route"></a>
-##在现有APP中加入RN
-###安装ios依赖
+## 在APP中嵌入RN页面
+### 安装ios依赖
 a. 安装 Command Line Tools for Xcode: `$ xcode-select`;
 
 b. 安装 [cocoapods] (http://www.jianshu.com/p/b64b4fd08d3c): `$ gem update --system` , `$ gem install cocoapods`;
@@ -66,7 +69,7 @@ f. 更改Info.plist，允许http:
 </dict>
 ```
 
-###在App中嵌入RN页面
+### 在App中嵌入RN页面
 <a id="IHReactNativeViewController"></a>
 
 定义 IHReactNativeViewController 接口：
@@ -126,7 +129,7 @@ UIViewController *controller = [[IHReactNativeViewController alloc]
 	initWithProperties :
 		// 传入的props
 		@{
-	   	 	@"state": @"NewHouse/"
+	   	 	@"state": @"NewHouse"
 		}
 	];
 
@@ -137,9 +140,9 @@ UIViewController *controller = [[IHReactNativeViewController alloc]
 > Ref: [https://facebook.github.io/react-native/docs/integration-with-existing-apps.html](https://facebook.github.io/react-native/docs/integration-with-existing-apps.html)
 
 <a id="interface"></a>
-##在RN中调用OC接口
+## 在RN中调用APP接口
 
-首先在RN中写好一个接口模块
+首先在APP中写好一个接口模块
 
 ```objective-c
 /**
@@ -198,16 +201,16 @@ let backHomeView = function () {
 >Ref: [http://facebook.github.io/react-native/docs/native-modules-ios.html](http://facebook.github.io/react-native/docs/native-modules-ios.html)
 
 
-<a id="dev"></a>##开发调试
+<a id="dev"></a>## 开发调试
 
-###模拟器中调试
+### 模拟器中调试
 1. 运行 `$ npm start`;
 2. 在x-code中打开App;
 3. 使用`command + R`刷新视图，`command + D`打开调试菜单
 
-###iPhone中调试
+### iPhone中调试
 
-<a id="build"></a>##打包发布
+<a id="build"></a>## 编译打包
 1. 运行`$ npm run build`，打包js;
 2. 更改上文 [IHReactNativeViewController.m](#IHReactNativeViewController) 中jsCodeLocation的值;
 3. 在xcode中添加assets【必须用Create folder references的方式，添加完是蓝色文件夹图标】和index.ios.jsbundle;

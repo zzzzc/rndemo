@@ -63,7 +63,7 @@ export default class RNRootView extends Component {
     }
   }
   render() {
-    let {props:{route}} = this;
+    let {props:{route={state:'NewHouse'}}} = this;
     return(
       <View style={styles.container}>
         <Navigator 
