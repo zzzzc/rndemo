@@ -1,20 +1,27 @@
 # React-native On IOS
 
 ## 目录
-1. [开发环境及项目结构](#install)2. [在APP中嵌入RN页面](#route)
-3. [在RN中调用APP接口](#interface)4. [开发调试](#dev)5. [编译打包](#build)
+1. [开发环境及项目结构](#install)
+2. [在APP中嵌入RN页面](#route)
+3. [在RN中调用APP接口](#interface)
+4. [开发调试](#dev)
+5. [编译打包](#build)
 
 <a id="install"></a>
 ## 开发环境及项目结构
-### 项目依赖：1. nodejs;
-2. x-code;3. watchman: `$ brew install watchman`;4. react-native-cli: `$ npm i react-native-cli -g`;
+### 项目依赖：
+1. nodejs;
+2. x-code;
+3. watchman: `$ brew install watchman`;
+4. react-native-cli: `$ npm i react-native-cli -g`;
 
 
-> Ref:[https://facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)### 项目结构:
+> Ref:[https://facebook.github.io/react-native/docs/getting-started.html](https://facebook.github.io/react-native/docs/getting-started.html)
+
+### 项目结构:
 
 ```
 .
-├── IWHouseIOS		//爱屋ios客户端，ignored
 ├── README.md
 ├── __tests__
 ├── android	
@@ -34,7 +41,7 @@
 ### 安装ios依赖
 a. 安装 Command Line Tools for Xcode: `$ xcode-select`;
 
-b. 安装 [cocoapods] (http://www.jianshu.com/p/b64b4fd08d3c): `$ gem update --system` , `$ gem install cocoapods`;
+b. 安装 [cocoapods](http://www.jianshu.com/p/b64b4fd08d3c): `$ gem update --system` , `$ gem install cocoapods`;
 
 c. 在ios项目里引入react依赖：在ios/Podfile里加入如下代码
 
@@ -201,7 +208,8 @@ let backHomeView = function () {
 >Ref: [http://facebook.github.io/react-native/docs/native-modules-ios.html](http://facebook.github.io/react-native/docs/native-modules-ios.html)
 
 
-<a id="dev"></a>## 开发调试
+<a id="dev"></a>
+## 开发调试
 
 ### 模拟器中调试
 1. 运行 `$ npm start`;
@@ -210,12 +218,14 @@ let backHomeView = function () {
 
 ### iPhone中调试
 
-<a id="build"></a>## 编译打包
+<a id="build"></a>
+## 编译打包
 1. 运行`$ npm run build`，打包js;
 2. 更改上文 [IHReactNativeViewController.m](#IHReactNativeViewController) 中jsCodeLocation的值;
 3. 在xcode中添加assets【必须用Create folder references的方式，添加完是蓝色文件夹图标】和index.ios.jsbundle;
 4. 没有关闭Debug JS Remotely会出现错误，`command + d`选择关闭;
 5. 关闭developer menu : For iOS open your project in Xcode and select Product → Scheme → Edit Scheme... (or press ⌘ + <). Next, select Run from the menu on the left and change the Build Configuration to Release.
-> Ref: [https://segmentfault.com/a/1190000004189538](https://segmentfault.com/a/1190000004189538)
+
+> Ref: [https://segmentfault.com/a/1190000004189538](https://segmentfault.com/a/1190000004189538)
 
 <a id="more"></a>
