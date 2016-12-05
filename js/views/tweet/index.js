@@ -2,18 +2,26 @@
 * @Author: zoucong
 * @Date:   2016-12-02 11:19:48
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-02 18:09:06
+* @Last Modified time: 2016-12-05 13:38:41
 */
 
 'use strict';
 
 import React from 'react';
-import {View,ListView,Text,ActivityIndicator} from 'react-native';
+import {StyleSheet,View,ListView,Text,ActivityIndicator} from 'react-native';
 import _ from 'underscore';
 import utils from '../../common/utils.js';
 import commonStyles from '../../styles/common.js';
-import {tweetStyles as styles} from './tweetStyles.js';
-import TweetItem from './tweetItem.js';
+import TweetItem from './components/tweetItem.js';
+
+let styles = StyleSheet.create({
+  loadingText: {
+    color: '#bbb'
+  },
+  loading: {
+    justifyContent: 'center'
+  }
+});
 
 export default class index extends React.Component {
   static propTypes = {
@@ -30,8 +38,13 @@ export default class index extends React.Component {
     };
   }
 
+  viewImages(images){
+    let {props:{navigator}} = this;
+    navigator.push({state:'imageSlider',title:'预览',props:{images}});
+  }
+
   _renderRow(rowData, sectionID, rowID){
-    return <TweetItem data={rowData} />;
+    return <TweetItem data={rowData} onPressImage={this.viewImages.bind(this)} />;
   }
 
   async _getTweets(){

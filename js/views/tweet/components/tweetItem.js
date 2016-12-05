@@ -2,16 +2,37 @@
 * @Author: zoucong
 * @Date:   2016-12-02 12:52:16
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-02 17:56:14
+* @Last Modified time: 2016-12-05 11:21:23
 */
 
 'use strict';
 
 import React from 'react';
-import {View,Text,Image} from 'react-native';
-import {tweetItemStyles as styles} from './tweetStyles.js';
-import commonStyles from '../../styles/common.js';
+import {StyleSheet,View,Text,Image,TouchableOpacity} from 'react-native';
+import commonStyles from '../../../styles/common.js';
 import _ from 'underscore';
+
+let styles = StyleSheet.create({
+  tweetItem: {
+    backgroundColor:'#fff',
+    marginVertical:5,
+    paddingVertical:5,
+    paddingHorizontal:10
+  },
+  avatar: {
+    width:36,
+    height:36,
+    borderRadius:18
+  },
+  tweetPictureWrapper:{
+    flexWrap: 'wrap'
+  },
+  tweetPicture:{
+    width:100,
+    height:100,
+    margin:5
+  }
+});
 
 export default class tweetItem extends React.Component {
   static propTypes = {
@@ -39,8 +60,8 @@ export default class tweetItem extends React.Component {
   }
 
   render() {
-    let tweet = this.props.data;
-    let {owner} = tweet;
+    let {data:tweet,onPressImage} = this.props;
+    let {owner,contentImages,contentText} = tweet;
     return (
       <View style={styles.tweetItem}>
         <View style={commonStyles.flexRow}>
@@ -54,11 +75,15 @@ export default class tweetItem extends React.Component {
           </View>
         </View>
         <View>
-          <Text>{tweet.contentText}</Text>
+          <Text>{contentText}</Text>
         </View>
         <View style={[commonStyles.flexRow,styles.tweetPictureWrapper]}>
           {
-            tweet.contentImages.map((d,i) => (<Image style={styles.tweetPicture} key={i} source={{uri:d}}/>) )
+            contentImages.map((d,i) => (
+              <TouchableOpacity style={styles.tweetPicture} key={i} onPress={()=>onPressImage(contentImages)}>
+                <Image style={styles.tweetPicture} source={{uri:d}}/>
+              </TouchableOpacity>
+            ))
           }
         </View>
       </View>
