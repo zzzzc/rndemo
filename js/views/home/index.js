@@ -2,7 +2,7 @@
 * @Author: zoucong
 * @Date:   2016-12-02 10:50:04
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-05 13:50:50
+* @Last Modified time: 2016-12-07 16:17:42
 */
 
 'use strict';
@@ -26,7 +26,11 @@ let homeRoutes = (state) => {
 
 let styles = StyleSheet.create({
   navigationBar:{
-    backgroundColor:'#0080FF'
+    backgroundColor:'#0080FF',
+    height:64
+  },
+  navigationBarTitleText:{
+    color:'#fff'
   }
 });
 
@@ -39,7 +43,7 @@ export default class Home extends React.Component {
     LeftButton(route, navigator, index, navState) {
       return index > 0 ?
         (
-          <TouchableOpacity onPress={()=>navigator.pop()}>
+          <TouchableOpacity style={[commonStyles.flexFirst,commonStyles.justifyCenter]} onPress={()=>navigator.pop()}>
             <Text>返回</Text>
           </TouchableOpacity>
         ) :
@@ -51,7 +55,11 @@ export default class Home extends React.Component {
     },
 
     Title (route, navigator, index, navState){
-      return <Text>{route.title}</Text>
+      return ( 
+        <View style={[commonStyles.flexFirst,commonStyles.justifyCenter]}>  
+          <Text style={[commonStyles.selfStart,styles.navigationBarTitleText]}>{route.title}</Text>
+        </View>
+      );
     }
   };
 
