@@ -2,7 +2,7 @@
 * @Author: zoucong
 * @Date:   2016-12-15 10:55:57
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-15 15:22:25
+* @Last Modified time: 2016-12-16 17:55:49
 */
 
 'use strict';
@@ -13,7 +13,9 @@
 import React from 'react';
 import {StyleSheet,View,ListView,Text,ActivityIndicator} from 'react-native';
 import commonStyles from '../../styles/common.js';
-import HouseItem from './components/houseItem.js';
+import NewHouseItem from './components/newHouseItem.js';
+import SaleHouseItem from './components/saleHouseItem.js';
+import RentHouseItem from './components/rentHouseItem.js';
 
 let styles = StyleSheet.create({
   footer:{
@@ -53,11 +55,20 @@ export default class HouseHistory extends React.Component {
   }
 
   _renderRow(rowData, sectionID, rowID){
-    return <HouseItem data={rowData} />;
+    switch (rowData.houseType){
+      case 0:
+        return <RentHouseItem data={rowData} />
+      case 1:
+        return <SaleHouseItem data={rowData} />
+      case 2:
+        return <NewHouseItem data={rowData} />
+      default:
+        return <View/>
+    }
   }
 
   _renderFooter(){
-    let {status,completed} = this.state;
+    let {completed} = this.state;
     let childNode = null;
     
     if (completed){

@@ -2,7 +2,7 @@
 * @Author: zoucong
 * @Date:   2016-12-02 11:09:43
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-07 16:21:29
+* @Last Modified time: 2016-12-16 11:42:55
 */
 
 'use strict';
@@ -60,5 +60,34 @@ export default StyleSheet.create({
   },
   selfEnd: {
     alignSelf: 'flex-end'
+  },
+  //font
+  fontBold:{
+    fontWeight: 'bold'
+  },
+  font12:{
+    fontSize: 12
+  },
+  font13:{
+    fontSize: 13
+  },
+  font14:{
+    fontSize: 14
+  },
+  font15:{
+    fontSize: 15
+  },
+  font16:{
+    fontSize: 16
+  },
+  font17:{
+    fontSize: 17
+  },
+  // colors
+  colorPrime:{
+    color:'#E84A01'
+  },
+  colorLight:{
+    color:'#757575'
   }
 });

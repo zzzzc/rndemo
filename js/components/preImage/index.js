@@ -2,7 +2,7 @@
 * @Author: zoucong
 * @Date:   2016-12-15 15:43:42
 * @Last Modified by:   zoucong
-* @Last Modified time: 2016-12-15 17:36:56
+* @Last Modified time: 2016-12-16 16:01:58
 */
 
 'use strict';
@@ -61,7 +61,9 @@ export default class PreImage extends React.Component {
         }
         <Image {...props} 
           onProgress={isIOS ? this._onProgress.bind(this) : undefined} 
-          onLoad={this._onLoad.bind(this)} />
+          onLoad={this._onLoad.bind(this)} >
+          {props.children}
+        </Image>
         {
           // ios添加进度条
           isIOS ? (
